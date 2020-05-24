@@ -1,3 +1,3 @@
 # learning.springREST
 
-My learning project for Spring TEST
+My learning project for Spring REST
