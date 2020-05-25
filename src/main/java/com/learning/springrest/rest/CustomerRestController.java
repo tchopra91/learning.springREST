@@ -1,8 +1,10 @@
 package com.learning.springrest.rest;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.learning.springrest.entity.Customer;
+import com.learning.springrest.entity.CustomerNotFoundException;
 import com.learning.springrest.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class CustomerRestController {
 
     @GetMapping("/customers/{id}")
     public Customer getCustomers(@PathVariable int id) {
-        return customerService.getCustomer(id);
+        Customer customer = customerService.getCustomer(id);
+
+        if (Objects.isNull(customer)) {
+            throw new CustomerNotFoundException("Custome with id = " + id + ", not found");
+        }
+
+        return customer;
     }
 }
