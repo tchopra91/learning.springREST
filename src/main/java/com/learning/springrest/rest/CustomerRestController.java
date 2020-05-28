@@ -10,6 +10,8 @@ import com.learning.springrest.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,6 +34,15 @@ public class CustomerRestController {
         if (Objects.isNull(customer)) {
             throw new CustomerNotFoundException("Custome with id = " + id + ", not found");
         }
+
+        return customer;
+    }
+
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customer) {
+        customer.setId(0);
+
+        customerService.saveCustomer(customer);
 
         return customer;
     }
